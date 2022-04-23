@@ -1,13 +1,14 @@
 <?php
-// Create folder for each user
+error_reporting(0);
 session_start();
-$dir = 'upload/' . session_id();
+$dir = 'upload/';
 if (!file_exists($dir))
   mkdir($dir);
 
+$error = '';
+$success = '';
+
 if (isset($_FILES["files"])) {
-  $error = '';
-  $success = '';
   try {
     //Count Files
     $files = $_FILES['files'];
@@ -16,17 +17,15 @@ if (isset($_FILES["files"])) {
     // Not allow PHP exexcute file upload to website
     for ($i = 0; $i < $count; $i++) {
       $filename = $files["name"][$i];
-      echo $filename;
       $extension = end(explode(".", $filename));
       if (in_array($extension, ["php", "phtml", "phar"])) {
-        echo "Test";
         $error = 'Hack detected!';
         break;
       }
     }
 
     // If all right, save these file to user directory
-    if ($error != '') {
+    if ($error == '') {
       for ($i = 0; $i < $count; $i++) {
         $filename = $files["name"][$i];
         $newFile = $dir . "/" . $filename;
@@ -75,12 +74,12 @@ if (isset($_FILES["files"])) {
       </div>
     </form>
 
-    <span style="color:red"><?php echo $error; ?></span>
-    <span style="color:green"><?php echo $success; ?></span>
+    <span style="color: red"><?php echo $error; ?></span>
+    <span style="color: green"><?php echo $success; ?></span>
 
     <div class="col-md-10 m-5">
       <div class="row py-4">
-        <!-- Display image -->
+        <!-- Display file -->
         <?php
         $filesUpload = glob($dir . "/*");
         foreach ($filesUpload as $eachFile) {
@@ -91,10 +90,10 @@ if (isset($_FILES["files"])) {
               <div class="ht-tm-element card bg-primary text-white mb-3 text-center">
                 <img src="<?php
                           $end = end(explode(".", $name));
-                          if (in_array($end, ["png", "jpg", "svg"])) {
+                          if (in_array($end, ["png", "jpg", "svg"])) {//if file is image, display it
                             echo $dir . "/" . $name;
                           } else {
-                            print("icon/files.png");
+                            print("icon/files.png");// else use icon instead
                           }
                           ?>" class="card-img-top" style='background-color:white'>
                 <div class="card-body">
