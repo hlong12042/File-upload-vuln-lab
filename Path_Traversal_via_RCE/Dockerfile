@@ -9,11 +9,13 @@ COPY httpd.conf /etc/apache2/apache2.conf
 
 # config permission
 RUN chown -R root:www-data /var/www/html
-RUN chmod 750 /var/www/html
-RUN find . -type f -exec chmod 640 {} \;
-RUN find . -type d -exec chmod 750 {} \;
+RUN chmod 777 /var/www/html
+RUN find . -type f -exec chmod 777 {} \;
+RUN find . -type d -exec chmod 777 {} \;
 # add write permission for upload file
 RUN chmod g+w /var/www/html/upload/
+#enable cgi
+RUN a2enmod cgi
 
 RUN echo "CBJS{so_magic_I_wondeR_what_about_other_system?}" > /fead248f338-secret.txt
 
