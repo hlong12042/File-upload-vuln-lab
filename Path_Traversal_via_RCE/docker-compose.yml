@@ -1,0 +1,7 @@
+version: "3.6"
+services:
+  File-upload-vuln:
+    image: cyberjutsu/training-labs:File-upload-vuln
+    restart: unless-stopped
+    ports:
+      - "0.0.0.0:4444:80"
