@@ -1,7 +1,5 @@
 <?php 
 $dir = 'upload/';
-if (!file_exists($dir))
-  mkdir($dir);
 
 $error = '';
 $success = '';
