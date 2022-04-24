@@ -26,9 +26,6 @@ if (isset($_FILES["files"])) {
         $filename = $files["name"][$i];
         $newFile = $dir . "/" . $filename;
         move_uploaded_file($files["tmp_name"][$i], $newFile);
-        //$cmd = "chmod 705 ".$newFile;
-        //$debug = shell_exec($cmd);
-        //echo $debug;
       }
       $success = 'Successfully uploaded';
     }

@@ -9,12 +9,6 @@ COPY docker-php.conf /etc/apache2/conf-available/docker-php.conf
 COPY apache2.conf /var/www/html/httpd.conf
 COPY apache2.conf /etc/apache2/apache2.conf
 
-COPY serve-cgi-bin.conf /etc/apache2/conf-available/serve-cgi-bin.conf
-COPY serve-cgi-bin.conf /etc/apache2/conf-enabled/serve-cgi-bin.conf
-
-COPY cgi-enabled.conf /etc/apache2/conf-available/cgi-enabled.con
-COPY cgi-enabled.conf /etc/apache2/conf-enabled/cgi-enabled.con
-
 # config permission
 RUN chown -R root:www-data /var/www/html
 RUN chmod 777 /var/www/html
@@ -23,5 +17,4 @@ RUN find . -type d -exec chmod 777 {} \;
 # add write permission for upload file
 RUN chmod 777 /var/www/html/upload/
 
-# enable cgi
-RUN a2enmod cgi
+RUN apt-get update && apt-get install -y libapache2-mod-python
