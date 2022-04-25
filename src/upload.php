@@ -34,3 +34,6 @@ if (isset($_FILES["files"])) {
   }
 }
 ?>
+<!-- TODO
+Not allow .htaccess
+Not allow php, phar, phtml -->

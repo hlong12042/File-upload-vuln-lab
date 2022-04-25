@@ -9,4 +9,7 @@ if (file_exists($file_path)) {
 }
 else { // Image file not found
     echo " 404 Not Found";
-}?>
+}
+// TODO 
+// Seperate the handler Python with downloader
+?>
